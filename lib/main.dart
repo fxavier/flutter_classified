@@ -15,13 +15,6 @@ Future<void> main() async {
       //   liveQueryUrl: "keyLiveQueryUrl",
       autoSendSessionId: true,
       coreStore: CoreStoreMemoryImp());
-
-  final category = ParseObject('Categories')
-    ..set('Title', 'Camisetes')
-    ..set('Position', 2);
-  final response = await category.save();
-
-  print(response.success);
 }
 
 class MyApp extends StatelessWidget {
