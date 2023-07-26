@@ -4,7 +4,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeParse();
   runApp(const MyApp());
+}
+
+Future<void> initializeParse() async {
   await dotenv.load(fileName: ".env");
   final keyApplicationId = dotenv.env['KEY_APPLICATION_ID'];
   final keyParseClientKey = dotenv.env['KEY_CLIENT_KEY'];
@@ -12,7 +17,6 @@ Future<void> main() async {
   await Parse().initialize(keyApplicationId!, keyParseServerUrl!,
       clientKey: keyParseClientKey,
       debug: true,
-      //   liveQueryUrl: "keyLiveQueryUrl",
       autoSendSessionId: true,
       coreStore: CoreStoreMemoryImp());
 }
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: BaseScreen(),
     );
   }
 }
